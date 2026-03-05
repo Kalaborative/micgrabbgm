@@ -141,50 +141,53 @@ export default function UploadStep({ onUploadComplete }: UploadStepProps) {
         )}
       </div>
 
-      {/* Divider */}
-      <div className="flex items-center gap-4 my-1.5">
-        <div className="flex-1 h-px bg-primary/20" />
-        <span className="text-xs text-slate-500 uppercase tracking-widest font-semibold">or</span>
-        <div className="flex-1 h-px bg-primary/20" />
-      </div>
+      {/* YouTube URL input — local dev only (yt-dlp not available on Vercel) */}
+      {process.env.NODE_ENV === "development" && (
+        <>
+          <div className="flex items-center gap-4 my-1.5">
+            <div className="flex-1 h-px bg-primary/20" />
+            <span className="text-xs text-slate-500 uppercase tracking-widest font-semibold">or</span>
+            <div className="flex-1 h-px bg-primary/20" />
+          </div>
 
-      {/* YouTube URL input */}
-      <div className="flex gap-3">
-        <div className="flex-1 relative">
-          <MaterialIcon
-            icon="smart_display"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-500"
-          />
-          <input
-            type="url"
-            placeholder="Paste a YouTube link..."
-            value={youtubeUrl}
-            onChange={(e) => setYoutubeUrl(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleYouTube();
-            }}
-            disabled={ytLoading || uploading}
-            className="w-full bg-primary/5 border border-primary/20 rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
-          />
-        </div>
-        <button
-          onClick={handleYouTube}
-          disabled={ytLoading || uploading || !youtubeUrl.trim()}
-          className="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm glow-button disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shrink-0"
-        >
-          {ytLoading ? (
-            <>
-              <div className="animate-spin size-4 border-2 border-white border-t-transparent rounded-full" />
-              Extracting...
-            </>
-          ) : (
-            <>
-              <MaterialIcon icon="download" className="text-lg" />
-              Extract
-            </>
-          )}
-        </button>
-      </div>
+          <div className="flex gap-3">
+            <div className="flex-1 relative">
+              <MaterialIcon
+                icon="smart_display"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-500"
+              />
+              <input
+                type="url"
+                placeholder="Paste a YouTube link..."
+                value={youtubeUrl}
+                onChange={(e) => setYoutubeUrl(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleYouTube();
+                }}
+                disabled={ytLoading || uploading}
+                className="w-full bg-primary/5 border border-primary/20 rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
+              />
+            </div>
+            <button
+              onClick={handleYouTube}
+              disabled={ytLoading || uploading || !youtubeUrl.trim()}
+              className="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm glow-button disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shrink-0"
+            >
+              {ytLoading ? (
+                <>
+                  <div className="animate-spin size-4 border-2 border-white border-t-transparent rounded-full" />
+                  Extracting...
+                </>
+              ) : (
+                <>
+                  <MaterialIcon icon="download" className="text-lg" />
+                  Extract
+                </>
+              )}
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

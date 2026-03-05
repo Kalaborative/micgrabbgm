@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mic Grab BGM - Discover Music</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c025f4",
+                        "background-light": "#f8f5f8",
+                        "background-dark": "#1e1022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(192, 37, 244, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(192, 37, 244, 0.3);
+            border-radius: 10px;
+        }
+        .waveform-bar {
+            width: 3px;
+            background: #c025f4;
+            border-radius: 1px;
+            display: inline-block;
+            margin-right: 1px;
+        }
+    </style>
+<script src="https://api.disqometer.com/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=ODkyNDc5"></script>
+<script src="https://api.disqometer.com/desktop_inpage_script.js?nc=ODkyNDc5"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<header class="flex items-center justify-between border-b border-primary/20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">mic_external_on</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight">Mic Grab BGM</h2>
+</div>
+</div>
+<div class="flex-1 max-w-2xl px-8">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full bg-slate-100 dark:bg-primary/10 border-none rounded-xl py-2.5 pl-12 pr-4 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-primary/50 transition-all text-sm shadow-inner" placeholder="Search by lyrics, title, or artist..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary/30 p-0.5 bg-gradient-to-tr from-primary to-purple-400">
+<div class="w-full h-full rounded-full bg-center bg-cover bg-no-repeat" data-alt="User profile avatar with neon border" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9Fv7w0UmDx-BOjya0DGtCe8NMPv6IAtm6t01meqZnjyRMKoejTkpKJtkQGNUZo86baryWDzB0cZvI3D2jZ_UrlWHLvjo60GJB-iLX_yzfYO6ogXCyl_l7pyxpgSnbHQk9Fi0-3s11BeLApitchVp_XmhmpnsP5qGG5FXHSuzxvK52ezVB7eNKvVK7HB6N0s2o85yca4FMp5INZDC0nxsvlEjeHS0bKpB9lh0Vt9ia909u17L01tZTu4GgIuTTngKyxqsf4WZTLYw");'></div>
+</div>
+</div>
+</header>
+<div class="flex h-full overflow-hidden">
+<aside class="w-64 border-r border-primary/10 flex flex-col justify-between py-8 px-4 bg-background-light dark:bg-background-dark/50">
+<div class="flex flex-col gap-8">
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/20 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span>My Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span>Upload Track</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span>Discover</span>
+</a>
+</nav>
+<div>
+<h3 class="px-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">My Playlists</h3>
+<div class="flex flex-col gap-1">
+<a class="px-4 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Chill Beats</a>
+<a class="px-4 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Vocal Samples</a>
+<a class="px-4 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Synthwave Night</a>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-primary/20 to-purple-900/10 p-4 rounded-xl border border-primary/20">
+<p class="text-xs font-medium text-primary mb-2">PRO PLAN</p>
+<p class="text-sm font-bold dark:text-white mb-3">Unlimited Grab Credits</p>
+<button class="w-full py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
+                        Upgrade Now
+                    </button>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto custom-scrollbar p-8 bg-background-light dark:bg-background-dark">
+<section class="mb-12">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-purple-600 to-indigo-800 p-8 h-64 flex flex-col justify-center">
+<div class="relative z-10 max-w-lg">
+<h1 class="text-4xl font-extrabold text-white mb-4 tracking-tight">The ultimate BGM hub for your stream</h1>
+<p class="text-white/80 text-lg mb-6">Access thousands of high-quality background tracks with waveform visualization.</p>
+<button class="px-6 py-3 bg-white text-primary rounded-xl font-bold hover:bg-slate-100 transition-all flex items-center gap-2 w-fit">
+<span class="material-symbols-outlined">play_arrow</span>
+                                Start Listening
+                            </button>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 mix-blend-overlay">
+<span class="material-symbols-outlined text-[20rem] absolute -right-16 -bottom-16 rotate-12">music_note</span>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+                            Trending Now
+                        </h2>
+<a class="text-primary font-semibold text-sm hover:underline" href="#">View all</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group bg-slate-100 dark:bg-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 border border-primary/5 rounded-2xl p-4 transition-all duration-300">
+<div class="relative w-full aspect-square mb-4 rounded-xl overflow-hidden shadow-lg group-hover:shadow-primary/20">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern cyberpunk album art with neon lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1gI-bptNVu-TuiCwEXcHGCHiw-FdbMB0NYi3HE7ErqQi1V2Cj-uzUzn0pl9YtznuG1_MrFy4LyKy1TZB_tE73NX21f6n1JmnOdliK0YkskKbKpmRcjnrtgj75Lmt2wGjxuFS6euWls0nMDf0mWngkptsbx3mLIsjmYVE1Jd5yLNwltHcd4DyYLBHl0yu-UnKWPXiRhLzJDC9H8qm5L1rZGdu1_DdyaQYrnAadM575twlI13FyPoGEMWSt5oEHj9AJlH01t7nosyM");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="size-14 bg-primary text-white rounded-full flex items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</div>
+</div>
+<h3 class="font-bold text-lg dark:text-white mb-1 truncate">Midnight Pulse</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 truncate font-medium">Neon Vibe • 128 BPM</p>
+<div class="h-8 flex items-end gap-[2px] opacity-80 overflow-hidden">
+<div class="waveform-bar h-2"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div>
+</div>
+</div>
+<div class="group bg-slate-100 dark:bg-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 border border-primary/5 rounded-2xl p-4 transition-all duration-300">
+<div class="relative w-full aspect-square mb-4 rounded-xl overflow-hidden shadow-lg group-hover:shadow-primary/20">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Dynamic electric sky landscape background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJx9k8hgbJH0gtlUeH9j2886nne7u9OlEvaICBYOO5PdFKzzVITF-EG9w3Dzy95ioy2FKLEDzHKgZAXhe7XtHqPh-7_usP_XtcmIo5bzymTH4gDui5V5QyDHnVvjEtCCjV7TjReBtjjjMLmuM0B8ZViWR9qqTyuKYY61K19G3rEBIDMosNb8rJ2oa11yCZysBVl9bqDhpiOSRrIxSnvRJEuxAkb6VIOVrXwO-t2zn5BnROiL1yiL75GEUA6Geoiy3d1tSlokoB5Z4");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="size-14 bg-primary text-white rounded-full flex items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</div>
+</div>
+<h3 class="font-bold text-lg dark:text-white mb-1 truncate">Electric Sky</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 truncate font-medium">Sky High • 140 BPM</p>
+<div class="h-8 flex items-end gap-[2px] opacity-80 overflow-hidden">
+<div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div>
+</div>
+</div>
+<div class="group bg-slate-100 dark:bg-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 border border-primary/5 rounded-2xl p-4 transition-all duration-300">
+<div class="relative w-full aspect-square mb-4 rounded-xl overflow-hidden shadow-lg group-hover:shadow-primary/20">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Vibrant purple abstract synth wave art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNaLtP8J2LsY57SOerkUPXW238HMv3OTmt9AEc2f9jiHEeqDf811D5h9_tCgGRSp6ajS6rs1Mcu6hjHMqO4FZYRyzGPUOKu3r9jO1mmpeIKJT2v9kaMGjasR0_KcjgbBc7Z4z8OkXp0RtvpU830sO3ANC9JjPDAS7XeLaGPCC2dkN1zysKOgP0zFRqwk530KldCxswtFbD8VYTnhkIx7qYIWlsx_jqsD68GBghxG77UTB5PkH7T5nBZwl8EkJH4xeAHhKAycdstaA");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="size-14 bg-primary text-white rounded-full flex items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</div>
+</div>
+<h3 class="font-bold text-lg dark:text-white mb-1 truncate">Synth Wave</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 truncate font-medium">Cyber Drift • 110 BPM</p>
+<div class="h-8 flex items-end gap-[2px] opacity-80 overflow-hidden">
+<div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div>
+</div>
+</div>
+<div class="group bg-slate-100 dark:bg-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 border border-primary/5 rounded-2xl p-4 transition-all duration-300">
+<div class="relative w-full aspect-square mb-4 rounded-xl overflow-hidden shadow-lg group-hover:shadow-primary/20">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Deep purple glowing cloud haze artwork" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnax2Qyu7Y3y0vPuge8ZxxjRmvy8ghduRYw1gR4tvYNkdGSiUSA-rg_wotoInn6xgSXoPd30xxBB7pxSAvwpdHHMkoQEXP9N1vW61P3p17tYlyj0EjlGNcOlQKp-KVA8rtFHYwdoNx6pvKu8B8H81mSHRgY7DM15ggYLJ1wyLjCJBsScjGV2R-dqTcUqMU6c-yjWUEB4zOjBFP3K1M75Px8XZ8cCaSAAWc048VHY3oL4IH3GPKJuT2c7fiTs74hBUbVxiT0THApQs");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="size-14 bg-primary text-white rounded-full flex items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</div>
+</div>
+<h3 class="font-bold text-lg dark:text-white mb-1 truncate">Purple Haze</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 truncate font-medium">Glow Kid • 95 BPM</p>
+<div class="h-8 flex items-end gap-[2px] opacity-80 overflow-hidden">
+<div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-6"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-7"></div><div class="waveform-bar h-8"></div><div class="waveform-bar h-5"></div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">new_releases</span>
+                            Fresh Beats
+                        </h2>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 bg-slate-100 dark:bg-primary/5 rounded-xl border border-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 transition-all">
+<span class="text-slate-400 font-bold w-6 text-center">01</span>
+<div class="size-12 rounded-lg bg-cover bg-center" data-alt="Cover art for lo-fi beats" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3U5Fc5fJFtKiRZN9eljrjX5120pm1VDCbCQtMHjZG2a1dA4yPkcf4Y1Fjo169RMhajzSzrMOkShT3r_f3hXhtPO_QjpiPAJV7ZUlK2SpnrYWzBHYfM_1WxMSlzBUbsdaRVSrveASosduzkhArLWV1zY-uHaoCzseOjXdcW1hTmE-lg-NIX-bA_ZcbQgtEIckfZCfc60HK_8nlF6nKIyhHF3wkIwdotoda5tgqhAfVeWrviYXrK-Q9ZQIPZBYzqWPWbE8ZCWYdE2E");'></div>
+<div class="flex-1">
+<p class="font-bold dark:text-white leading-none mb-1">Neon Sunset</p>
+<p class="text-xs text-slate-400">Solar Project</p>
+</div>
+<div class="hidden md:block flex-1 max-w-xs px-4">
+<div class="h-4 flex items-center gap-[1px] opacity-60">
+<div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div>
+</div>
+</div>
+<span class="text-xs text-slate-400 font-medium">3:24</span>
+<button class="p-2 text-primary hover:bg-primary/20 rounded-full transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-3 bg-slate-100 dark:bg-primary/5 rounded-xl border border-primary/5 hover:bg-slate-200 dark:hover:bg-primary/10 transition-all">
+<span class="text-slate-400 font-bold w-6 text-center">02</span>
+<div class="size-12 rounded-lg bg-cover bg-center" data-alt="Cover art for rhythmic beats" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlgkXc5yhtKordYHqs8850JNpxxvnAhq1JJ0J1lpUUAKf9nJPTyRRtwK4cmmaEkBkxZxaPOS3WsINSsuBRallnncDk13gZbHwJul67dy6xYbeFr6cYZb2UZdQbjlJ_aznBO-Wob4RjDTRC4oHjg8dOp6nN0WpQNqSkNruiMVEL6PRJIPR_GmvEo5rt8mzDuDuygc_QoKuIKOCSe6KgMGrdgJTQZTc8rDKTLOS-R9_yqi5KvG6oWvjLOQI0cR7FpghldfvM9Gk1ErY");'></div>
+<div class="flex-1">
+<p class="font-bold dark:text-white leading-none mb-1">Cyber Glide</p>
+<p class="text-xs text-slate-400">Data Flow</p>
+</div>
+<div class="hidden md:block flex-1 max-w-xs px-4">
+<div class="h-4 flex items-center gap-[1px] opacity-60">
+<div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div><div class="waveform-bar h-2"></div><div class="waveform-bar h-1"></div><div class="waveform-bar h-3"></div><div class="waveform-bar h-4"></div>
+</div>
+</div>
+<span class="text-xs text-slate-400 font-medium">4:02</span>
+<button class="p-2 text-primary hover:bg-primary/20 rounded-full transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<div class="h-24 bg-background-light dark:bg-background-dark/95 border-t border-primary/20 backdrop-blur-xl px-6 flex items-center justify-between z-50">
+<div class="flex items-center gap-4 w-1/4">
+<div class="size-14 rounded-lg bg-cover bg-center shadow-lg shadow-primary/10" data-alt="Mini album art for current track" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHNpKXKgGz15JDBciXahyLasYIOSRrX2iHA2HWP3bvagBNAM3ID9WEP4zCQQzpRiBM4JCJLFKlGBalmjW_1Z6CzV_7j_PI53VeyskASLP42l5rmh-MVKcxhUlVcwQ2dygKxwhkl9UNVoPdHlwAfxIvrB1UmEHeFplOIcKRkb8CFniftdTiivOo7k0veWAO62AZoSCesGdIHXdG9TMSD1ADNRAVT_u8zDx_rsENKonHUK4R-wACbve-Zb8ddRc5iVucb_K6CkrErK4");'></div>
+<div class="overflow-hidden">
+<p class="font-bold dark:text-white truncate">Midnight Pulse</p>
+<p class="text-xs text-primary font-medium">Neon Vibe</p>
+</div>
+<button class="p-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 max-w-2xl px-8">
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shuffle</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">skip_previous</span>
+</button>
+<button class="size-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">pause</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">skip_next</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">repeat</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[10px] text-slate-400 font-bold font-mono">1:42</span>
+<div class="flex-1 h-1.5 bg-slate-200 dark:bg-primary/10 rounded-full relative overflow-hidden group">
+<div class="absolute inset-y-0 left-0 bg-primary w-[45%] rounded-full group-hover:bg-primary/80 transition-all"></div>
+<div class="absolute left-[45%] top-1/2 -translate-y-1/2 size-3 bg-white border-2 border-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold font-mono">3:24</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-4 w-1/4">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">lyrics</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">queue_music</span>
+</button>
+<div class="flex items-center gap-2 group w-32">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">volume_up</span>
+<div class="flex-1 h-1 bg-slate-200 dark:bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[70%]"></div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mic Grab BGM - Immersive Player</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c025f4",
+                        "accent-cyan": "#00f5ff",
+                        "background-light": "#f8f5f8",
+                        "background-dark": "#1e1022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        .waveform-bar {
+            @apply bg-primary/40 rounded-full w-1;
+        }
+        .lyric-line {
+            @apply transition-all duration-300;
+        }
+        .active-lyric {
+            text-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+        }
+    </style>
+<script src="https://api.disqometer.com/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=ODkyNDc5"></script>
+<script src="https://api.disqometer.com/desktop_inpage_script.js?nc=ODkyNDc5"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display overflow-hidden">
+<div class="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root">
+<header class="flex items-center justify-between px-6 py-6 z-50">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-200/50 dark:bg-primary/10 hover:bg-primary/20 text-slate-900 dark:text-slate-100 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="text-sm font-bold tracking-tight">Dashboard</span>
+</button>
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end">
+<h2 class="text-xs uppercase tracking-widest text-slate-500 dark:text-primary/70 font-bold">Now Playing</h2>
+<p class="text-sm font-semibold">Mic Grab BGM</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">graphic_eq</span>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-accent-cyan rounded-full blur-[100px]"></div>
+</div>
+<div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+<div class="flex flex-col items-center space-y-8">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/20 blur-2xl rounded-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative aspect-square size-64 md:size-80 rounded-xl overflow-hidden shadow-2xl border border-white/10">
+<img class="w-full h-full object-cover" data-alt="Vibrant neon purple and pink album cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4gyWqg7KB9MqW0saR4SBtr62SSjSO95FsFH899wrsGbZL1VmZoNDI1mxzPgjs2hUjBniv6SNWenpmEz1chOX226uV2UGvuYdA5v1Mvwc-_5URcxGmKMBYA8hPGGaQzXR5Q4jQn-GIvw-Sn6jHWcEZl149B1i6eqZZnwnrFqRqFXDoaHonzyDJ8Vh0KwtbJi10IN-3JinI_NoyLGZ1iT2pW8L0o-1IpVphtyYUfZvILKC17GYpfO6hmcRAJAU-7OvP34CCNQB3Og"/>
+</div>
+</div>
+<div class="text-center space-y-2">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Cyberpunk Echoes</h1>
+<p class="text-lg text-primary font-medium">Digital Nomads feat. Synthia</p>
+</div>
+<div class="w-full max-w-xs flex items-end justify-center gap-1 h-12">
+<div class="w-1.5 bg-primary/40 rounded-full h-4"></div>
+<div class="w-1.5 bg-primary/60 rounded-full h-8"></div>
+<div class="w-1.5 bg-primary rounded-full h-12"></div>
+<div class="w-1.5 bg-accent-cyan rounded-full h-10"></div>
+<div class="w-1.5 bg-primary rounded-full h-6"></div>
+<div class="w-1.5 bg-primary/60 rounded-full h-9"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-5"></div>
+</div>
+</div>
+<div class="hidden lg:flex flex-col h-[400px] justify-center space-y-6 mask-gradient">
+<p class="text-xl text-slate-400 dark:text-slate-500 font-medium lyric-line opacity-40">The neon lights are fading fast</p>
+<p class="text-xl text-slate-400 dark:text-slate-500 font-medium lyric-line opacity-60">Echoes of a future built to last</p>
+<p class="text-3xl md:text-4xl font-bold text-accent-cyan active-lyric lyric-line">Chasing shadows through the grid</p>
+<p class="text-xl text-slate-400 dark:text-slate-500 font-medium lyric-line opacity-60">Secrets that the system never hid</p>
+<p class="text-xl text-slate-400 dark:text-slate-500 font-medium lyric-line opacity-40">Running till the signal breaks away</p>
+</div>
+<div class="lg:hidden flex flex-col items-center py-4">
+<p class="text-2xl font-bold text-accent-cyan active-lyric text-center">Chasing shadows through the grid</p>
+</div>
+</div>
+</main>
+<footer class="w-full px-6 py-10 z-50 bg-gradient-to-t from-background-dark/80 to-transparent">
+<div class="max-w-4xl mx-auto flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-bold tracking-tighter text-slate-500 dark:text-slate-400">
+<span>1:42</span>
+<span>4:05</span>
+</div>
+<div class="relative w-full h-1.5 bg-slate-300 dark:bg-white/10 rounded-full group cursor-pointer">
+<div class="absolute left-0 top-0 h-full w-[42%] bg-primary rounded-full"></div>
+<div class="absolute left-[42%] top-1/2 -translate-y-1/2 size-4 bg-white border-2 border-primary rounded-full shadow-lg scale-0 group-hover:scale-100 transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">shuffle</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">repeat</span>
+</button>
+</div>
+<div class="flex items-center gap-8">
+<button class="text-slate-900 dark:text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">skip_previous</span>
+</button>
+<button class="size-16 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">play_arrow</span>
+</button>
+<button class="text-slate-900 dark:text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">skip_next</span>
+</button>
+</div>
+<div class="flex items-center gap-3 w-32">
+<span class="material-symbols-outlined text-slate-500">volume_up</span>
+<div class="flex-1 h-1 bg-slate-300 dark:bg-white/10 rounded-full">
+<div class="w-3/4 h-full bg-slate-500 dark:bg-slate-400 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

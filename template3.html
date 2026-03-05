@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mic Grab BGM - Create Track</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c025f4",
+                        "background-light": "#f8f5f8",
+                        "background-dark": "#1e1022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glow-button {
+            box-shadow: 0 0 15px rgba(192, 37, 244, 0.4);
+            transition: box-shadow 0.3s ease;
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(192, 37, 244, 0.6);
+        }
+        .waveform-bar {
+            transition: height 0.2s ease;
+        }
+    </style>
+<script src="https://api.disqometer.com/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=ODkyNDc5"></script>
+<script src="https://api.disqometer.com/desktop_inpage_script.js?nc=ODkyNDc5"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col min-h-screen w-full overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-primary/20 px-6 py-4 lg:px-10 bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined block">mic_external_on</span>
+</div>
+<div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Mic Grab BGM</h2>
+<p class="text-xs text-primary font-medium uppercase tracking-widest">Creator Studio</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full p-4 lg:p-8 gap-8">
+<!-- Sidebar Navigation -->
+<aside class="w-full lg:w-64 flex flex-col gap-2 shrink-0">
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:fill-1">home</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary transition-all" href="#">
+<span class="material-symbols-outlined fill-1">add_circle</span>
+<span class="font-medium">New Track</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-medium">My Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium">Analytics</span>
+</a>
+<div class="my-4 border-t border-primary/10"></div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Editor Content -->
+<div class="flex-1 flex flex-col gap-8 max-w-4xl">
+<!-- Progress Stepper -->
+<div class="grid grid-cols-4 gap-2">
+<div class="flex flex-col gap-2">
+<div class="h-1.5 w-full bg-primary rounded-full"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary">Step 1: Upload</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="h-1.5 w-full bg-primary/20 rounded-full"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 2: Trim</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="h-1.5 w-full bg-primary/20 rounded-full"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 3: Metadata</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="h-1.5 w-full bg-primary/20 rounded-full"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 4: Lyrics</span>
+</div>
+</div>
+<!-- Section 1: Upload -->
+<section class="bg-white dark:bg-primary/5 rounded-xl border border-primary/20 overflow-hidden">
+<div class="p-6 border-b border-primary/10">
+<h3 class="text-lg font-bold">Step 1: Upload Audio</h3>
+<p class="text-sm text-slate-500">Supported format: MP3, WAV (Max 20MB)</p>
+</div>
+<div class="p-8">
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-primary/30 rounded-xl bg-primary/5 py-12 px-6 group cursor-pointer hover:border-primary transition-colors">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">cloud_upload</span>
+</div>
+<h4 class="text-lg font-semibold mb-1">Drag and drop your MP3 here</h4>
+<p class="text-sm text-slate-500 mb-6 text-center">or browse your computer to find the perfect track</p>
+<button class="bg-primary text-white px-8 py-3 rounded-lg font-bold text-sm glow-button">
+                                Select File
+                            </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Trim Audio -->
+<section class="bg-white dark:bg-primary/5 rounded-xl border border-primary/20 overflow-hidden opacity-60 pointer-events-none">
+<div class="p-6 border-b border-primary/10 flex justify-between items-center">
+<div>
+<h3 class="text-lg font-bold">Step 2: Trim Track</h3>
+<p class="text-sm text-slate-500">Define the start and end of your BGM</p>
+</div>
+<span class="text-xs font-mono bg-primary/10 px-2 py-1 rounded text-primary">00:45 / 03:12</span>
+</div>
+<div class="p-8">
+<div class="relative h-32 w-full bg-slate-100 dark:bg-slate-800/50 rounded-lg flex items-center justify-center gap-1 px-4 overflow-hidden">
+<!-- Fake Waveform Visualizer -->
+<div class="flex items-center gap-[2px] w-full h-full opacity-40">
+<div class="w-1 bg-primary/40 h-8 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-12 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-16 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-10 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-24 rounded-full"></div>
+<div class="w-1 bg-primary h-28 rounded-full"></div>
+<div class="w-1 bg-primary h-20 rounded-full"></div>
+<div class="w-1 bg-primary h-24 rounded-full"></div>
+<div class="w-1 bg-primary h-18 rounded-full"></div>
+<div class="w-1 bg-primary h-30 rounded-full"></div>
+<div class="w-1 bg-primary h-22 rounded-full"></div>
+<div class="w-1 bg-primary h-16 rounded-full"></div>
+<div class="w-1 bg-primary h-26 rounded-full"></div>
+<div class="w-1 bg-primary h-20 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-14 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-10 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-12 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-8 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-16 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-10 rounded-full"></div>
+</div>
+<!-- Handles -->
+<div class="absolute left-1/4 top-0 bottom-0 w-[2px] bg-primary">
+<div class="absolute -top-1 -left-1.5 size-3 bg-primary rounded-full ring-4 ring-primary/20"></div>
+<div class="absolute -bottom-1 -left-1.5 size-3 bg-primary rounded-full ring-4 ring-primary/20"></div>
+</div>
+<div class="absolute right-1/3 top-0 bottom-0 w-[2px] bg-primary">
+<div class="absolute -top-1 -left-1.5 size-3 bg-primary rounded-full ring-4 ring-primary/20"></div>
+<div class="absolute -bottom-1 -left-1.5 size-3 bg-primary rounded-full ring-4 ring-primary/20"></div>
+</div>
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+</div>
+<div class="flex justify-center gap-4 mt-6">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+<span class="font-bold text-sm">Preview</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 3: Metadata -->
+<section class="bg-white dark:bg-primary/5 rounded-xl border border-primary/20 overflow-hidden opacity-60 pointer-events-none">
+<div class="p-6 border-b border-primary/10">
+<h3 class="text-lg font-bold">Step 3: Track Metadata</h3>
+</div>
+<div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-400 uppercase tracking-wider">Track Title</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-primary/20 rounded-lg focus:ring-primary focus:border-primary py-3" placeholder="e.g. Midnight Grooves" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-400 uppercase tracking-wider">Artist Name</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-primary/20 rounded-lg focus:ring-primary focus:border-primary py-3" placeholder="e.g. DJ Synthwave" type="text"/>
+</div>
+</div>
+</section>
+<!-- Section 4: Lyrics -->
+<section class="bg-white dark:bg-primary/5 rounded-xl border border-primary/20 overflow-hidden opacity-60 pointer-events-none">
+<div class="p-6 border-b border-primary/10">
+<h3 class="text-lg font-bold">Step 4: Lyrics Editor</h3>
+</div>
+<div class="p-8">
+<textarea class="w-full bg-background-light dark:bg-background-dark border-primary/20 rounded-xl focus:ring-primary focus:border-primary p-4 text-lg italic" placeholder="Paste or type your lyrics here..." rows="8"></textarea>
+<div class="mt-6 flex justify-end gap-4">
+<button class="px-6 py-3 rounded-lg border border-primary/20 font-bold text-sm hover:bg-primary/10 transition-colors">Save Draft</button>
+<button class="bg-primary text-white px-10 py-3 rounded-lg font-bold text-sm glow-button flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">publish</span>
+                                Publish Track
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Context Info / Tips -->
+<aside class="hidden xl:flex w-72 flex-col gap-6">
+<div class="p-6 bg-gradient-to-br from-primary/20 to-transparent border border-primary/20 rounded-xl">
+<h4 class="font-bold text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined">lightbulb</span>
+                        Creator Tip
+                    </h4>
+<p class="text-sm leading-relaxed text-slate-400">
+                        Tracks with clear metadata and high-quality MP3s (320kbps) perform 40% better in the global discovery feed.
+                    </p>
+</div>
+<div class="p-6 bg-background-light dark:bg-primary/5 border border-primary/20 rounded-xl">
+<h4 class="font-bold mb-4">Upload History</h4>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">music_note</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-bold truncate">Sunset Drive.mp3</p>
+<p class="text-xs text-slate-500">Yesterday, 10:24 PM</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 bg-slate-200 dark:bg-slate-800 rounded-lg flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">music_note</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-bold truncate">Neo Tokyo Beats.wav</p>
+<p class="text-xs text-slate-500">2 days ago</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 text-xs font-bold text-primary uppercase tracking-widest hover:underline">View All Activities</button>
+</div>
+</aside>
+</main>
+<!-- Footer Player (Preview) -->
+<div class="fixed bottom-0 left-0 right-0 h-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-primary/20 z-50 flex items-center px-6 lg:px-12 justify-between">
+<div class="flex items-center gap-4 w-1/3">
+<div class="size-12 rounded-lg overflow-hidden bg-primary/20 flex items-center justify-center">
+<img class="size-full object-cover" data-alt="Abstract vibrant purple audio waveform background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1ys4Gee-keF14-U0VpgxUt83u1gGbtICOXI-Z63b6_I2YP2LqM6EC0Q0_cy2BmfeMZ2GfbblL6rcltJ0YFyhmmRMbaSf6R7FjMqNDDhJnWNQpI2qakwXNkZWJDSrQ207QApN_sYF8xfqc9KeC65TxemuKNr0G3KXwmuQ8X4jEXicrxpnUzwR6D0dLdB8fv5cZwEMb7VvPLhO_v7c0Za4vO9Uz0dKrEI_xhEFWVe_4aRlYZV9FDadRFuoX5oECJHPFXi4brDwAO_g"/>
+</div>
+<div>
+<p class="font-bold text-sm">New Creation</p>
+<p class="text-xs text-primary">Untitled Track</p>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 max-w-lg">
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">shuffle</span></button>
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">skip_previous</span></button>
+<button class="size-10 rounded-full bg-primary text-white flex items-center justify-center glow-button">
+<span class="material-symbols-outlined fill-1">play_arrow</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">skip_next</span></button>
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">repeat</span></button>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[10px] text-slate-500 font-mono">0:00</span>
+<div class="flex-1 h-1 bg-primary/20 rounded-full relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0 bg-primary"></div>
+</div>
+<span class="text-[10px] text-slate-500 font-mono">3:12</span>
+</div>
+</div>
+<div class="w-1/3 flex justify-end items-center gap-4">
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">lyrics</span></button>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">list</span></button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">volume_up</span>
+<div class="w-20 h-1 bg-primary/20 rounded-full">
+<div class="w-2/3 h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

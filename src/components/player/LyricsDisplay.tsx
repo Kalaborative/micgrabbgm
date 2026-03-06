@@ -23,7 +23,7 @@ export default function LyricsDisplay({ lyrics }: LyricsDisplayProps) {
   }
 
   return (
-    <div className="h-[400px] overflow-y-auto custom-scrollbar space-y-4 py-8">
+    <div className="h-[400px] overflow-y-auto overscroll-contain custom-scrollbar space-y-4 py-8" style={{ WebkitOverflowScrolling: 'touch' }}>
       {lines.map((line, i) => (
         <p key={i} className="text-lg text-slate-300 font-medium">
           {line}

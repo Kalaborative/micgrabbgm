@@ -143,7 +143,7 @@ export default function PlayerPage() {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 relative overflow-y-auto">
         <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
           <AlbumArt title={track.title} artist={track.artist} />
           <LyricsDisplay lyrics={track.lyrics} />

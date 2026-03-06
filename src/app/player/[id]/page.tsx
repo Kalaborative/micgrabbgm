@@ -64,7 +64,8 @@ export default function PlayerPage() {
       audio.removeEventListener("ended", onEnd);
       audio.pause();
     };
-  }, [track, volume]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [track]);
 
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;

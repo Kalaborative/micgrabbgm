@@ -99,7 +99,7 @@ export default function UploadStep({ onUploadComplete }: UploadStepProps) {
         <input
           ref={inputRef}
           type="file"
-          accept="audio/*"
+          accept="audio/mpeg,audio/wav,audio/mp3,audio/wave,audio/x-wav,audio/aac,audio/ogg,audio/flac,audio/mp4,.mp3,.wav,.aac,.ogg,.flac,.m4a"
           className="hidden"
           onChange={(e) => {
             const file = e.target.files?.[0];

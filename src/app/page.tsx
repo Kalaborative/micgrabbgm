@@ -13,6 +13,13 @@ import { useTracks } from "@/hooks/useTracks";
 export default function HomePage() {
   const { user } = useAuth();
   const [view, setView] = useState<"all" | "mine">("all");
+  const [layout, setLayout] = useState<"card" | "list">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("layout-preference");
+      if (saved === "card" || saved === "list") return saved;
+    }
+    return "card";
+  });
   const [searchQuery, setSearchQuery] = useState("");
 
   const filterUserId = view === "mine" && user ? user.uid : undefined;
@@ -28,9 +35,6 @@ export default function HomePage() {
         t.lyrics.toLowerCase().includes(q)
     );
   }, [tracks, searchQuery]);
-
-  const gridTracks = filtered.slice(0, 4);
-  const listTracks = filtered.slice(4);
 
   const sectionTitle = view === "mine" ? "My Tracks" : "Latest Tracks";
   const sectionIcon = view === "mine" ? "person" : "new_releases";
@@ -64,29 +68,50 @@ export default function HomePage() {
             </div>
           )}
 
-          {gridTracks.length > 0 && (
-            <section className="mb-8">
+          {filtered.length > 0 && (
+            <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                   <MaterialIcon icon={sectionIcon} className="text-primary" />
                   {sectionTitle}
                 </h2>
+                <div className="flex rounded-lg overflow-hidden border border-white/10">
+                  <button
+                    onClick={() => { setLayout("card"); localStorage.setItem("layout-preference", "card"); }}
+                    className={`flex items-center gap-1 px-3 py-1.5 text-sm transition-colors ${
+                      layout === "card"
+                        ? "bg-primary text-white"
+                        : "bg-white/5 text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <MaterialIcon icon="grid_view" className="text-base" />
+                  </button>
+                  <button
+                    onClick={() => { setLayout("list"); localStorage.setItem("layout-preference", "list"); }}
+                    className={`flex items-center gap-1 px-3 py-1.5 text-sm transition-colors ${
+                      layout === "list"
+                        ? "bg-primary text-white"
+                        : "bg-white/5 text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <MaterialIcon icon="view_list" className="text-base" />
+                  </button>
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {gridTracks.map((track) => (
-                  <TrackCard key={track.id} track={track} />
-                ))}
-              </div>
-            </section>
-          )}
 
-          {listTracks.length > 0 && (
-            <section>
-              <div className="space-y-4">
-                {listTracks.map((track, i) => (
-                  <TrackListItem key={track.id} track={track} index={i} />
-                ))}
-              </div>
+              {layout === "card" ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filtered.map((track) => (
+                    <TrackCard key={track.id} track={track} />
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {filtered.map((track, i) => (
+                    <TrackListItem key={track.id} track={track} index={i} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
         </main>

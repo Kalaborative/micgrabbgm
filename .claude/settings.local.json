@@ -14,7 +14,8 @@
       "Bash(pip install:*)",
       "Bash(ffmpeg:*)",
       "Bash(/c/Users/kalab/micgrabbgm/ffmpeg.exe:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(tail:*)"
     ]
   }
 }

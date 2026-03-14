@@ -2,8 +2,6 @@
 
 import { useRef, useState, useCallback } from "react";
 import MaterialIcon from "@/components/ui/MaterialIcon";
-import { uploadToCloudinary } from "@/lib/cloudinary/upload";
-
 interface UploadStepProps {
   onUploadComplete: (url: string, duration: number, title?: string) => void;
 }
@@ -33,16 +31,17 @@ export default function UploadStep({ onUploadComplete }: UploadStepProps) {
       setProgress(0);
 
       try {
-        const result = await uploadToCloudinary(file, setProgress);
         const audioCtx = new AudioContext();
         const arrayBuffer = await file.arrayBuffer();
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
         const duration = audioBuffer.duration;
         audioCtx.close();
 
-        onUploadComplete(result.url, duration);
+        const localUrl = URL.createObjectURL(file);
+        setProgress(100);
+        onUploadComplete(localUrl, duration);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Upload failed");
+        setError(err instanceof Error ? err.message : "Failed to process audio");
       } finally {
         setUploading(false);
       }

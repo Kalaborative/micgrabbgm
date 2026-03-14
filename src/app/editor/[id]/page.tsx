@@ -91,7 +91,7 @@ export default function EditorPage() {
         title,
         artist,
         lyrics,
-        audioUrl,
+        audioUrl: trimmedResult.url,
         trimmedAudioUrl: trimmedResult.url,
         trimStart,
         trimEnd,

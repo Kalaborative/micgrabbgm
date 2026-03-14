@@ -23,7 +23,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filterUserId = view === "mine" && user ? user.uid : undefined;
-  const { tracks, loading, error } = useTracks(filterUserId);
+  const { tracks, totalPages, page, loading, error, goToPage } = useTracks(filterUserId);
 
   const filtered = useMemo(() => {
     if (!searchQuery.trim()) return tracks;
@@ -108,8 +108,40 @@ export default function HomePage() {
               ) : (
                 <div className="space-y-4">
                   {filtered.map((track, i) => (
-                    <TrackListItem key={track.id} track={track} index={i} />
+                    <TrackListItem key={track.id} track={track} index={i + (page - 1) * 12} />
                   ))}
+                </div>
+              )}
+
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  <button
+                    onClick={() => goToPage(page - 1)}
+                    disabled={page === 1}
+                    className="flex items-center justify-center size-10 rounded-lg border border-white/10 text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  >
+                    <MaterialIcon icon="chevron_left" />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => goToPage(p)}
+                      className={`flex items-center justify-center size-10 rounded-lg text-sm font-medium transition-colors ${
+                        p === page
+                          ? "bg-primary text-white"
+                          : "border border-white/10 text-slate-400 hover:bg-primary/10 hover:text-primary"
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => goToPage(page + 1)}
+                    disabled={page === totalPages}
+                    className="flex items-center justify-center size-10 rounded-lg border border-white/10 text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  >
+                    <MaterialIcon icon="chevron_right" />
+                  </button>
                 </div>
               )}
             </section>

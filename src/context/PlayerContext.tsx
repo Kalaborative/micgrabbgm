@@ -38,7 +38,14 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (audio.src !== url) {
       audio.src = url;
     }
-    audio.play();
+    audio.play().catch(() => {
+      // Autoplay blocked on mobile — play on first user gesture
+      const resume = () => {
+        audio.play().catch(() => {});
+        document.removeEventListener("pointerdown", resume);
+      };
+      document.addEventListener("pointerdown", resume, { once: true });
+    });
     setState((s) => ({ ...s, currentTrack: track, isPlaying: true }));
   }, []);
 
@@ -46,7 +53,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
-      audio.play();
+      audio.play().catch(() => {});
       setState((s) => ({ ...s, isPlaying: true }));
     } else {
       audio.pause();

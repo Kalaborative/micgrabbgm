@@ -55,14 +55,28 @@ export default function PlayerPage() {
     audio.addEventListener("loadedmetadata", onDur);
     audio.addEventListener("ended", onEnd);
 
-    // Auto-play when track loads
-    audio.play().then(() => setIsPlaying(true)).catch(() => {});
+    // Auto-play when track loads; on mobile browsers autoplay is blocked
+    // without a user gesture, so we listen for the first interaction to resume.
+    let resumeOnGesture: (() => void) | null = null;
+
+    audio.play().then(() => setIsPlaying(true)).catch(() => {
+      // Autoplay was blocked — play on first user interaction
+      resumeOnGesture = () => {
+        audio.play().then(() => setIsPlaying(true)).catch(() => {});
+        document.removeEventListener("pointerdown", resumeOnGesture!);
+        resumeOnGesture = null;
+      };
+      document.addEventListener("pointerdown", resumeOnGesture, { once: true });
+    });
 
     return () => {
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("loadedmetadata", onDur);
       audio.removeEventListener("ended", onEnd);
       audio.pause();
+      if (resumeOnGesture) {
+        document.removeEventListener("pointerdown", resumeOnGesture);
+      }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [track]);

@@ -15,7 +15,8 @@
       "Bash(ffmpeg:*)",
       "Bash(/c/Users/kalab/micgrabbgm/ffmpeg.exe:*)",
       "Bash(grep:*)",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(ls:*)"
     ]
   }
 }

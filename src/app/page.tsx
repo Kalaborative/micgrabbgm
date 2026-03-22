@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import BottomPlayer from "@/components/layout/BottomPlayer";
@@ -23,18 +23,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filterUserId = view === "mine" && user ? user.uid : undefined;
-  const { tracks, totalPages, page, loading, error, goToPage } = useTracks(filterUserId);
-
-  const filtered = useMemo(() => {
-    if (!searchQuery.trim()) return tracks;
-    const q = searchQuery.toLowerCase();
-    return tracks.filter(
-      (t) =>
-        t.title.toLowerCase().includes(q) ||
-        t.artist.toLowerCase().includes(q) ||
-        t.lyrics.toLowerCase().includes(q)
-    );
-  }, [tracks, searchQuery]);
+  const { tracks, totalPages, page, loading, error, goToPage } = useTracks(filterUserId, searchQuery);
 
   const sectionTitle = view === "mine" ? "My Tracks" : "Latest Tracks";
   const sectionIcon = view === "mine" ? "person" : "new_releases";
@@ -58,7 +47,7 @@ export default function HomePage() {
             </div>
           )}
 
-          {!loading && !error && filtered.length === 0 && (
+          {!loading && !error && tracks.length === 0 && (
             <div className="text-center py-20 text-slate-400">
               <MaterialIcon icon="library_music" className="text-6xl text-primary/30 mb-4" />
               <p className="text-lg font-semibold mb-2">
@@ -68,7 +57,7 @@ export default function HomePage() {
             </div>
           )}
 
-          {filtered.length > 0 && (
+          {tracks.length > 0 && (
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-white flex items-center gap-2">
@@ -101,13 +90,13 @@ export default function HomePage() {
 
               {layout === "card" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filtered.map((track) => (
+                  {tracks.map((track) => (
                     <TrackCard key={track.id} track={track} />
                   ))}
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {filtered.map((track, i) => (
+                  {tracks.map((track, i) => (
                     <TrackListItem key={track.id} track={track} index={i + (page - 1) * 12} />
                   ))}
                 </div>

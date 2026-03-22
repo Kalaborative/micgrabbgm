@@ -8,16 +8,19 @@ import { formatTime } from "@/lib/audio/formatTime";
 interface TrimStepProps {
   audioUrl: string;
   onRegionChange: (start: number, end: number) => void;
+  transpose: number;
+  onTransposeChange: (semitones: number) => void;
   onNext: () => void;
   onBack: () => void;
 }
 
-export default function TrimStep({ audioUrl, onRegionChange, onNext, onBack }: TrimStepProps) {
+export default function TrimStep({ audioUrl, onRegionChange, transpose, onTransposeChange, onNext, onBack }: TrimStepProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { isReady, isPlaying, duration, currentTime, regionStart, regionEnd, playRegion, playPause, stop } =
     useWaveSurfer({
       url: audioUrl,
       container: containerRef,
+      detuneCents: transpose * 100,
     });
 
   // Spacebar toggles play/pause when not in a text field
@@ -109,6 +112,38 @@ export default function TrimStep({ audioUrl, onRegionChange, onNext, onBack }: T
               <span className="text-slate-400">End</span>
               <span className="text-primary font-bold">{formatTime(regionEnd)}</span>
             </div>
+          </div>
+
+          {/* Transpose controls */}
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => onTransposeChange(Math.max(-12, transpose - 1))}
+              disabled={transpose <= -12}
+              className="size-8 flex items-center justify-center rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <MaterialIcon icon="remove" className="text-lg" />
+            </button>
+            <div className="flex items-center gap-2 min-w-[80px] justify-center">
+              <MaterialIcon icon="music_note" className="text-primary text-sm" />
+              <span className="text-sm font-bold font-mono">
+                {transpose > 0 ? `+${transpose}` : transpose} st
+              </span>
+            </div>
+            <button
+              onClick={() => onTransposeChange(Math.min(12, transpose + 1))}
+              disabled={transpose >= 12}
+              className="size-8 flex items-center justify-center rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <MaterialIcon icon="add" className="text-lg" />
+            </button>
+            {transpose !== 0 && (
+              <button
+                onClick={() => onTransposeChange(0)}
+                className="text-xs text-primary hover:text-primary/80 transition-colors ml-1"
+              >
+                Reset
+              </button>
+            )}
           </div>
 
           {/* Time + playback info */}

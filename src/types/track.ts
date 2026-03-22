@@ -9,6 +9,7 @@ export interface Track {
   trimmedAudioUrl: string;
   trimStart: number;
   trimEnd: number;
+  transpose?: number;
   duration: number;
   status: "draft" | "published";
   createdAt: number;

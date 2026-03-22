@@ -54,27 +54,14 @@ export async function getTracks(
   return { tracks, total: countSnap.data().count, lastDoc };
 }
 
-/** @deprecated Use getTracks with pagination instead */
-export async function getAllTracks(): Promise<Track[]> {
-  const q = query(
-    collection(db, COLLECTION),
-    where("status", "==", "published")
-  );
-  const snapshot = await getDocs(q);
-  const tracks = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Track));
-  return tracks.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-}
-
-/** @deprecated Use getTracks with pagination instead */
-export async function getTracksByUser(userId: string): Promise<Track[]> {
-  const q = query(
-    collection(db, COLLECTION),
-    where("userId", "==", userId),
-    where("status", "==", "published")
-  );
-  const snapshot = await getDocs(q);
-  const tracks = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Track));
-  return tracks.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+export async function searchAllTracks(userId?: string): Promise<Track[]> {
+  const constraints = [
+    where("status", "==", "published"),
+    ...(userId ? [where("userId", "==", userId)] : []),
+    orderBy("createdAt", "desc"),
+  ];
+  const snapshot = await getDocs(query(collection(db, COLLECTION), ...constraints));
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Track));
 }
 
 export async function getTrack(id: string): Promise<Track | null> {

@@ -1,7 +1,8 @@
 export async function trimAudio(
   audioUrl: string,
   startTime: number,
-  endTime: number
+  endTime: number,
+  semitones: number = 0
 ): Promise<Blob> {
   const response = await fetch(audioUrl);
   const arrayBuffer = await response.arrayBuffer();
@@ -14,6 +15,7 @@ export async function trimAudio(
   const endSample = Math.floor(endTime * sampleRate);
   const trimmedLength = endSample - startSample;
 
+  // Trim first
   const trimmedBuffer = audioContext.createBuffer(
     audioBuffer.numberOfChannels,
     trimmedLength,
@@ -28,7 +30,48 @@ export async function trimAudio(
     }
   }
 
-  // Encode to WAV
+  if (semitones !== 0) {
+    // Pitch-shift without changing speed using SoundTouch
+    const { SoundTouch, SimpleFilter, WebAudioBufferSource } = await import("soundtouchjs");
+
+    const source = new WebAudioBufferSource(trimmedBuffer);
+    const soundtouch = new SoundTouch();
+    soundtouch.pitchSemitones = semitones;
+    const filter = new SimpleFilter(source, soundtouch);
+
+    const numChannels = trimmedBuffer.numberOfChannels;
+    const chunks: Float32Array[] = [];
+    const chunkSize = 4096;
+    let totalFrames = 0;
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const buf = new Float32Array(chunkSize * 2);
+      const extracted = filter.extract(buf, chunkSize);
+      if (extracted === 0) break;
+      chunks.push(buf.subarray(0, extracted * 2));
+      totalFrames += extracted;
+    }
+
+    const outputBuffer = audioContext.createBuffer(numChannels, totalFrames, sampleRate);
+    const left = outputBuffer.getChannelData(0);
+    const right = numChannels > 1 ? outputBuffer.getChannelData(1) : null;
+
+    let frameIdx = 0;
+    for (const chunk of chunks) {
+      for (let i = 0; i < chunk.length; i += 2) {
+        left[frameIdx] = chunk[i];
+        if (right) right[frameIdx] = chunk[i + 1];
+        frameIdx++;
+      }
+    }
+
+    const wavBlob = encodeWAV(outputBuffer);
+    audioContext.close();
+    return wavBlob;
+  }
+
+  // Fast path: no pitch shift
   const wavBlob = encodeWAV(trimmedBuffer);
   audioContext.close();
   return wavBlob;

@@ -17,7 +17,7 @@ import { trimAudio } from "@/lib/audio/trimAudio";
 
 const stepTitles = [
   { title: "Upload Audio", subtitle: "Upload MP3/WAV (Max 20MB) or paste a YouTube link" },
-  { title: "Trim Track", subtitle: "Drag the handles to define start and end" },
+  { title: "Trim & Transpose", subtitle: "Drag handles to trim, use +/- to pitch shift" },
   { title: "Track Metadata", subtitle: "Add a title and artist name" },
   { title: "Lyrics Editor", subtitle: "Add lyrics for the player display" },
 ];
@@ -31,6 +31,7 @@ export default function EditorPage() {
   const [duration, setDuration] = useState(0);
   const [trimStart, setTrimStart] = useState(0);
   const [trimEnd, setTrimEnd] = useState(0);
+  const [transpose, setTranspose] = useState(0);
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [lyrics, setLyrics] = useState("");
@@ -41,6 +42,7 @@ export default function EditorPage() {
     setAudioUrl(url);
     setDuration(dur);
     setTrimEnd(dur);
+    setTranspose(0);
     if (ytTitle) setTitle(ytTitle);
     setCurrentStep(2);
   }, []);
@@ -62,6 +64,7 @@ export default function EditorPage() {
         trimmedAudioUrl: "",
         trimStart,
         trimEnd,
+        transpose,
         duration,
         status: "draft",
       });
@@ -81,7 +84,7 @@ export default function EditorPage() {
     setError(null);
 
     try {
-      const trimmedBlob = await trimAudio(audioUrl, trimStart, trimEnd);
+      const trimmedBlob = await trimAudio(audioUrl, trimStart, trimEnd, transpose);
       const trimmedFile = new File([trimmedBlob], "trimmed.wav", { type: "audio/wav" });
       const trimmedResult = await uploadToCloudinary(trimmedFile);
 
@@ -95,6 +98,7 @@ export default function EditorPage() {
         trimmedAudioUrl: trimmedResult.url,
         trimStart,
         trimEnd,
+        transpose,
         duration: trimEnd - trimStart,
         status: "published",
       });
@@ -171,6 +175,8 @@ export default function EditorPage() {
                   <TrimStep
                     audioUrl={audioUrl}
                     onRegionChange={handleRegionChange}
+                    transpose={transpose}
+                    onTransposeChange={setTranspose}
                     onNext={() => setCurrentStep(3)}
                     onBack={() => setCurrentStep(1)}
                   />

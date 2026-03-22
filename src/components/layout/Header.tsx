@@ -44,17 +44,17 @@ export default function Header({ onSearch }: HeaderProps) {
     .slice(0, 2);
 
   return (
-    <header className="flex items-center justify-between border-b border-primary/20 bg-bg-dark/80 backdrop-blur-md px-6 py-4 z-50">
-      <div className="flex items-center gap-8">
+    <header className="flex flex-wrap items-center justify-between gap-3 border-b border-primary/20 bg-bg-dark/80 backdrop-blur-md px-4 py-3 sm:px-6 sm:py-4 z-50">
+      <div className="flex items-center gap-3 sm:gap-8">
         <Link href="/" className="flex items-center gap-3 text-primary">
           <div className="size-8 flex items-center justify-center bg-primary/20 rounded-lg">
             <MaterialIcon icon="mic_external_on" className="text-primary text-2xl" />
           </div>
-          <h2 className="text-white text-xl font-bold tracking-tight">Mic Grab BGM</h2>
+          <h2 className="hidden sm:block text-white text-xl font-bold tracking-tight">Mic Grab BGM</h2>
         </Link>
       </div>
 
-      <div className="flex-1 max-w-2xl px-8">
+      <div className="order-last w-full sm:order-none sm:w-auto sm:flex-1 max-w-2xl sm:px-8">
         <div className="relative group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <MaterialIcon icon="search" className="text-slate-400 group-focus-within:text-primary transition-colors" />
